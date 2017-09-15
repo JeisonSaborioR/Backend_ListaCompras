@@ -3,7 +3,7 @@ var schema = mongoose.Schema
 
 
 
-var datosModel = schema({
+var productModel = schema({
 	nombre: String,
     precio: Number,
     imagen: String,
@@ -14,7 +14,7 @@ var datosModel = schema({
 
 
 //Permite ser utilizada desde cualquier punto
-module.exports = mongoose.model('Product',datosModel)
+module.exports = mongoose.model('Product',productModel)
 
 
 

@@ -1,24 +1,25 @@
 
 var mongoose = require('mongoose')
 var schema = mongoose.Schema
+var User = require('../models/User')
+//var Product = require('../models/Product')
+//var User = require('../models/User')
 
 
-
-var datosModel = schema({
+var shopListModel = schema({
 
     nombre: String,
     fechaCompra: String,   
     montoTotal: Number,
-    cantidad: Number,
     products: Array,
-    users: Array
-
+    users: [{type: schema.ObjectId, ref: "User"}]
+    
 })
 
 
 
 //Permite ser utilizada desde cualquier punto
-module.exports = mongoose.model('ShopList', datosModel)
+module.exports = mongoose.model('ShopList', shopListModel)
 
 
 

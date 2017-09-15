@@ -1,49 +1,88 @@
 
 var User = require('../models/User')
+var bcrypt = require('bcrypt-nodejs')
 
-//Guarda el usuario en la base de datos
+//Guarda el usuario en la base de datos que realicen el registro
 function saveUser(req, res){
 
     let user = new User()
     user.nombre = req.body.nombre
     user.email = req.body.email
-    user.shopLists = []
+    user.password = req.body.password
 
     user.save(function(error){
 		if (error) {
-			res.json({success:false,message:'Fail to save!!'})
+           
+			res.json({success:false,message:'Username or email already exists!'})
 		}else{
 			res.json({success:true, message:'Successful save!!'})
 		}
 	});
 }
 
+//Guarda los usuarios en la base de datos que realicen el login por medio de Google
+function logUserGoogle(req, res){
+
+    let user = new User()
+    
+    user.nombre = req.body.nombre
+    user.email = req.body.email
+    
+    user.save(function(error){
+		if (error) {
+            let email = req.body.email
+            
+            User.findOne({email: email}, (err, user) =>{
+                if(err) return res.status(500).send({message: 'Error al realizar la peteción'})
+                if(!user) return res.status(404).send({message:'No existen usuarios'})
+                return res.status(200).send({user})
+            })
+            //res.json({success:false,message:'Username or email already exists!'})
+		}else{
+			return res.status(200).send({user})
+		}
+	});
+}
+
+
 //Obtiene todos los usuario registrados en la base de datos
-function getUser(req, res){
+function getUsers(req, res){
 
     User.find({}, (err, users) =>{
-        if(err) return res.status(500).send({message: 'Error al realizar la peteción'})
+        if(err) return res.status(500).send({message: 'Error al realizar la petición'})
         if(!users) return res.status(404).send({message:'No existen usuarios'})
             
-        res.send(200,{users})
+        return res.status(200).send({users})
     })
 }
 
-//Obtiene el usuario identificado por la idea solicitada
-function getUserById(req, res){
 
-    let id = req.params.id
+
+function signIn(req, res){
+    let email = req.params.email
     
-    User.findById(id, (err, user) =>{
-        if(err) return res.status(500).send({message: 'Error al realizar la peteción'})
-        if(!user) return res.status(404).send({message:'No existen usuarios'})
-        res.send(200,{user})
+    User.findOne({email: email}, (err, user) =>{
+        if(err) throw err
+        
+        if(!user){
+           return res.status(500).send({message: 'Could not authenticate user!'})
+        }else {
+            var validPassword = user.comparePassword(req.body.password)
+            if(validPassword){
+                return res.status(200).send({user})
+			}else{
+				
+				return res.status(500).send({message:'Could not authenticate user!'})
+			}
+        }
     })
 }
 
+//Permite utilizar las funciones en otros scripts
 module.exports = {
     saveUser,
-    getUser,
-    getUserById
+    logUserGoogle,
+    getUsers,
+    signIn
 }
 
