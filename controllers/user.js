@@ -24,7 +24,7 @@ function saveUser(req, res){
 function logUserGoogle(req, res){
 
     let user = new User()
-    
+
     user.nombre = req.body.nombre
     user.email = req.body.email
     
@@ -59,7 +59,7 @@ function getUsers(req, res){
 
 
 function signIn(req, res){
-    let email = req.params.email
+    let email = req.body.email
     
     User.findOne({email: email}, (err, user) =>{
         if(err) throw err

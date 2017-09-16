@@ -9,20 +9,27 @@ var shopListCtrl = require('../controllers/shopList')
 //EndPoints para los Usuarios
 api.post('/saveUser',userCtrl.saveUser)
 api.post('/authenticateGoogle',userCtrl.logUserGoogle)
-api.get('/getUser',userCtrl.getUsers)
-api.get('/authenticate/:email',userCtrl.signIn)
+api.post('/authenticate',userCtrl.signIn)
+api.get('/getUsers',userCtrl.getUsers)
+
 
 
 
 //EndPoints para los productos
 api.post('/saveProduct/:idShopL',productCtrl.saveProduct)
+//api.delete('/deleteShopList/:idShopList', shopListCtrl.deleteShopList)
+//api.put('/updateShopList/:idShopList',shopListCtrl.updateShopList)
 //api.get('/getProducts',productCtrl.getProduct)
 
 
 
 //EndPoints para listas de compras
-api.post('/saveShopList/:id',shopListCtrl.saveShopList)
+api.post('/saveShopList',shopListCtrl.saveShopList)
 api.get('/getShopLists',shopListCtrl.getShopLists)
+api.get('/getShopListsUser/:idUser', shopListCtrl.getShopListUser)
+api.delete('/deleteShopList/:idShopList', shopListCtrl.deleteShopList)
+api.put('/updateShopList/:idShopList',shopListCtrl.updateShopList)
+
 //api.get('/getShopList/:id',shopListCtrl.getShopListById)
 
 

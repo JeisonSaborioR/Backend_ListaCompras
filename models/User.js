@@ -16,7 +16,7 @@ userModel.pre('save', function(next){
     let user = this
     bcrypt.hash(user.passWord,null,null,function(err,hash){
         if(err) return next(err)
-        usuario.passWord = hash
+        user.passWord = hash
         next()
     })
 })
