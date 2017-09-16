@@ -9,8 +9,6 @@
   "author": "Jeison Saborío Rodríguez & Sergio Araya Zúñiga",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^1.0.3",
-    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "jwt-simple": "^0.5.1",
