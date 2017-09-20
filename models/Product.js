@@ -4,10 +4,10 @@ var schema = mongoose.Schema
 
 
 var productModel = schema({
-	nombre: String,
-    precio: Number,
-    imagen: String,
-    cantidad: Number,
+	name: String,
+    price: Number,
+    image: String,
+    quantity: Number,
     isInCart: Boolean 
 })
 

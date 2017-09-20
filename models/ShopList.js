@@ -2,15 +2,13 @@
 var mongoose = require('mongoose')
 var schema = mongoose.Schema
 var User = require('../models/User')
-//var Product = require('../models/Product')
-//var User = require('../models/User')
 
 
 var shopListModel = schema({
-    user : String,
-    nombre: String,
-    fechaCompra: String,   
-    montoTotal: Number,
+    idUser : String,
+    name: String,
+    shopDay: String,   
+    amount: Number,
     products: Array,
     users: [{type: schema.ObjectId, ref: "User"}]
     

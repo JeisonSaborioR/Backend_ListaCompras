@@ -12,10 +12,10 @@ function saveShopList(req, res){
 
     let shopList = new ShopList()
 
-    shopList.user = id
-    shopList.nombre = req.body.nombre
-    shopList.fechaCompra = req.body.fechaCompra
-    shopList.montoTotal = 0
+    shopList.idUser = id
+    shopList.name = req.body.name
+    shopList.shopDay = req.body.shopDay
+    shopList.amount = 0
     shopList.users = [id]
 
 
@@ -80,6 +80,7 @@ function getShopListUser(req, res) {
         //res.status(200).send({shopList})
     })
 } 
+
 //Actuliza el array de usuarios por parte de cada listas de compras
 function updateShopListArrayUsers(req,res){
     

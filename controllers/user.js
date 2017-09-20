@@ -6,7 +6,7 @@ var bcrypt = require('bcrypt-nodejs')
 function saveUser(req, res){
 
     let user = new User()
-    user.nombre = req.body.nombre
+    user.name = req.body.name
     user.email = req.body.email
     user.password = req.body.password
 
@@ -25,7 +25,7 @@ function logUserGoogle(req, res){
 
     let user = new User()
 
-    user.nombre = req.body.nombre
+    user.name = req.body.name
     user.email = req.body.email
     
     user.save(function(error){

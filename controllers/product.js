@@ -8,10 +8,10 @@ function saveProduct(req, res){
     let idShopList = req.body.idShopList
     console.log(idShopList)
     let product = new Product()
-    product.nombre = req.body.nombre
-    product.precio = req.body.precio
-    product.imagen = "#"
-    product.cantidad = req.body.cantidad
+    product.name = req.body.name
+    product.price = req.body.price
+    product.image = "#"
+    product.quantity = req.body.quantity
     product.isInCart = false 
     
     ShopList.update(
@@ -32,16 +32,21 @@ function deleteProduct(req,res){
     let productId = req.params.idProduct
     let shopListId  = req.body.idShopList
 
-    ShopList.find({}, (err, shopLists) =>{
+    console.log(productId)
+    ShopList.find({_id: shopListId}, (err,shopList) => {
+        
         if(err) return res.status(500).send({message: 'Error al realizar la petición'})
-        if(!shopLists) return res.status(404).send({message:'No existen usuarios'})
-            
-        res.send(200,{shopLists})
-    })
-    ShopList.find({products: {_id:shopListId}}, (err,ShopList) => {
-        if(err) return res.status(500).send({message: 'Error al realizar la petición'})
-        if(!shopLists) return res
-
+        if(!shopList) return res.status(404).send({message:'No existen usuarios'})
+        console.log(shopList)
+        shopList.find({products: {_id: productId}}, (err,product) => {
+            console.log(product)
+            /*
+            product.remove(err =>{
+                if(err) return res.status(500).send({message: 'Error al realizar la petición'})
+                return res.status(200).send({message:'ShopList delete!!!'})
+            })
+            */
+        })
     })
 
     /*

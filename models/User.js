@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt-nodejs')
 
 //Modelo para la creación del objeto usuario
 var userModel = schema({
-	nombre: String,
+	name: String,
     email:  {type: String, unique: true, lowercase: true},
     passWord: {type: String, select:false}
 
