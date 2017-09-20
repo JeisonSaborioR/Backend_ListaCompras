@@ -7,7 +7,7 @@ var User = require('../models/User')
 
 
 var shopListModel = schema({
-
+    user : String,
     nombre: String,
     fechaCompra: String,   
     montoTotal: Number,

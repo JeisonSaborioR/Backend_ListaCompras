@@ -57,7 +57,7 @@ function getUsers(req, res){
 }
 
 
-
+//Permite la autentificación en un logueo normal por parte del usuario
 function signIn(req, res){
     let email = req.body.email
     

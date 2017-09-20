@@ -1,30 +1,30 @@
 
 
 var ShopList = require('../models/ShopList')
-var datetime = new Date();
+
 //var User = require('../models/User')
+
 
 //Guarda el usuario en la base de datos
 function saveShopList(req, res){
 
     let id = req.body.idUser
 
-   
     let shopList = new ShopList()
-   
 
+    shopList.user = id
     shopList.nombre = req.body.nombre
-    shopList.fechaCompra = datetime
+    shopList.fechaCompra = req.body.fechaCompra
     shopList.montoTotal = 0
     shopList.users = [id]
 
 
     shopList.save(function(error){
 		if (error) {
-			res.json({success:false,message:'Fail to save!!'})
-		}else{
+			return res.status(500).send({message: 'Error al realizar la petición'})
+		}else{         
+            return res.status(200).send({message: 'Successful save!!'})
 
-			res.json({success:true, message:'Successful save!!'})
 		}
 	});
    
@@ -42,7 +42,7 @@ function getShopLists(req, res){
     })
 }
 
-
+//Borra una lista de compras a partir del id de la lista de compras
 function deleteShopList(req,res){
     let shopListId = req.params.idShopList
 
@@ -58,7 +58,7 @@ function deleteShopList(req,res){
 
 }
 
-
+//Actualiza un shop list a partir del id de la lista de compras
 function updateShopList(req,res){
     let shopListId = req.params.idShopList
     let updateShopList = req.body
@@ -70,16 +70,33 @@ function updateShopList(req,res){
     })
 }
 
+//Return todas las listas de compra para el usuario logueado
 function getShopListUser(req, res) {
     
     let userId = req.params.idUser
     ShopList.find({users: [userId]}, (err, shopList) =>{
         if(err) return res.status(500).send({message:'Error al realizar la petición'})
-        console.log(shopList)
         res.send(200,{shopList})
         //res.status(200).send({shopList})
     })
 } 
+//Actuliza el array de usuarios por parte de cada listas de compras
+function updateShopListArrayUsers(req,res){
+    
+    let shopListId = req.params.idShopList
+    let userId  = req.body.idUser
+
+
+    ShopList.update(
+        {_id: shopListId},
+        {$push: {users: userId}},
+        {safe: true, upsert:true},
+        function(err, model) {
+            console.log(err);
+        }
+        
+    )
+}
 
 /*
 //Obtiene el usuario identificado por la idea solicitada
@@ -103,8 +120,9 @@ module.exports = {
     getShopLists,
     deleteShopList,
     updateShopList,
-    getShopListUser
-    //getShopListById,
+    getShopListUser,
+    updateShopListArrayUsers
+   
     
 }
 

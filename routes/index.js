@@ -16,9 +16,9 @@ api.get('/getUsers',userCtrl.getUsers)
 
 
 //EndPoints para los productos
-api.post('/saveProduct/:idShopL',productCtrl.saveProduct)
-//api.delete('/deleteShopList/:idShopList', shopListCtrl.deleteShopList)
-//api.put('/updateShopList/:idShopList',shopListCtrl.updateShopList)
+api.post('/saveProduct',productCtrl.saveProduct)
+api.delete('/deleteProduct/:idProduct', productCtrl.deleteProduct)
+api.put('/updateProduct/:idProduct',productCtrl.updateProduct)
 //api.get('/getProducts',productCtrl.getProduct)
 
 
@@ -29,8 +29,9 @@ api.get('/getShopLists',shopListCtrl.getShopLists)
 api.get('/getShopListsUser/:idUser', shopListCtrl.getShopListUser)
 api.delete('/deleteShopList/:idShopList', shopListCtrl.deleteShopList)
 api.put('/updateShopList/:idShopList',shopListCtrl.updateShopList)
+api.post('/shareShopList',shopListCtrl.updateShopListArrayUsers)
 
-//api.get('/getShopList/:id',shopListCtrl.getShopListById)
+
 
 
 module.exports = api
