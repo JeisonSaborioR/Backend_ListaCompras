@@ -25,7 +25,7 @@ function saveShopList(req, res){
 		}else{         
             return res.status(200).send({message: 'Successful save!!'})
 
-		}
+		} 
 	});
    
 }
