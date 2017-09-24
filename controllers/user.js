@@ -27,6 +27,7 @@ function logUserGoogle(req, res){
 
     user.name = req.body.name
     user.email = req.body.email
+    user.userImage = req.body.userImage
     
     user.save(function(error){
 		if (error) {

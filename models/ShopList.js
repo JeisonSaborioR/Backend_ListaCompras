@@ -7,7 +7,7 @@ var User = require('../models/User')
 var shopListModel = schema({
     idUser : String,
     name: String,
-    shopDay: String,   
+    shopDate: String,   
     amount: Number,
     products: Array,
     users: [{type: schema.ObjectId, ref: "User"}]

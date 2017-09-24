@@ -14,7 +14,7 @@ function saveShopList(req, res){
 
     shopList.idUser = id
     shopList.name = req.body.name
-    shopList.shopDay = req.body.shopDay
+    shopList.shopDate = req.body.shopDate
     shopList.amount = 0
     shopList.users = [id]
 

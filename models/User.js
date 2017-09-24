@@ -7,7 +7,8 @@ var bcrypt = require('bcrypt-nodejs')
 var userModel = schema({
 	name: String,
     email:  {type: String, unique: true, lowercase: true},
-    passWord: {type: String, select:false}
+    passWord: {type: String, select:false},
+    userImage: String
 
 })
 
