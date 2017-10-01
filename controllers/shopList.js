@@ -77,7 +77,7 @@ function getShopListUser(req, res) {
     find({ users: [userId] }).
     populate('products'). // only works if we pushed refs to children
     exec(function (err, shopLists) {
-        if (err) return handleError(err);
+        if (err) return err
         res.status(200).send({shopLists})
     });
 } 
