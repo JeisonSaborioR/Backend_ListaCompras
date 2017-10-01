@@ -6,81 +6,60 @@ var ShopList = require('../models/ShopList')
 function saveProduct(req, res){
   
     let idShopList = req.body.idShopList
-    console.log(idShopList)
     let product = new Product()
+
     product.name = req.body.name
     product.price = req.body.price
     product.image = "#"
     product.quantity = req.body.quantity
+    //product.idShopList = idShopList
     product.isInCart = false 
     
-    ShopList.update(
-        {_id: idShopList},
-        {$push: {products: product}},
-        {safe: true, upsert: true},
-        function(err, model) {
-            console.log(err);
-        }
-        
-    )
-    res.send(200,{product})
+    product.save(function(error){
+		if (error) {
+			return res.status(500).send({message: 'Request failed'})
+		}else{     
+            
+            ShopList.update(
+                {_id: idShopList},
+                {$push: {products: product._id}},
+                {safe: true, upsert:true},
+                function(err, model) {
+                    console.log(err);
+                }
+                
+            )
+            return res.status(200).send({product})
+            
+		} 
+	});
 }
-
 
 //Borra un producto de una lista de compras
 function deleteProduct(req,res){
     let productId = req.params.idProduct
-    let shopListId  = req.body.idShopList
 
-    console.log(productId)
-    ShopList.find({_id: shopListId}, (err,shopList) => {
+    Product.findById(productId, (err, product) => {
+        if(err) return res.status(500).send({message: 'Request failed'})
         
-        if(err) return res.status(500).send({message: 'Error al realizar la petición'})
-        if(!shopList) return res.status(404).send({message:'No existen usuarios'})
-        console.log(shopList)
-        shopList.find({products: {_id: productId}}, (err,product) => {
-            console.log(product)
-            /*
-            product.remove(err =>{
-                if(err) return res.status(500).send({message: 'Error al realizar la petición'})
-                return res.status(200).send({message:'ShopList delete!!!'})
-            })
-            */
+        product.remove(err =>{
+            if(err) return res.status(500).send({message: 'Request failed'})
+            
+            return res.status(200).send({message:'Product delete!!!'})
         })
     })
 
-    /*
-    console.log(productId)
-    console.log(shopListId)
-    ShopList.update(
-        {_id: shopListId},
-        {$pull: {products: {_id: productId}}},
-        {multi: true},
-        function(err, model) {
-            console.log(err);
-        }
-        
-    )
-    */
 }
 
 //Actuliza un producto de la lista de compras
 function updateProduct(req,res){
-
     let productId = req.params.idProduct
-    let shopListId  = req.body.idShopList
-    console.log(productId)
-    ShopList.update(
-        {_id: shopListId,"products._id":productId},
-        {$set: {"products.$": req.body}},
-        {multi: true},
-        function(err, model) {
-            console.log(err);
-        }
-        
-    )
+    let updateProduct = req.body
 
-
+    Product.findByIdAndUpdate(productId,updateProduct, (err, product) => {
+        if(err) return res.status(500).send({message: 'Request failed'})
+        res.status(200).send({product: product})
+    })
 }
 
 //Actuliza el estado (isInCart true o false) de un producto
@@ -88,8 +67,7 @@ function updateStateProduct(req,res){
     
         let productId = req.params.idProduct
         let shopListId  = req.body.idShopList
-    
-    
+
         ShopList.update(
             {_id: shopListId,"products._id":productId},
             {$set: {"products.$": req.body}},

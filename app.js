@@ -20,5 +20,4 @@ app.use('/controllers', express.static(__dirname + '/controllers'))
 
 //app.post('/registroProducto',productCtrl.registrarProduct)
 
-
 module.exports = app

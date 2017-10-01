@@ -8,20 +8,19 @@ var ShopList = require('../models/ShopList')
 //Guarda el usuario en la base de datos
 function saveShopList(req, res){
 
-    let id = req.body.idUser
-
+    let idUser = req.body.idUser
     let shopList = new ShopList()
 
-    shopList.idUser = id
+    shopList.idUser = idUser
     shopList.name = req.body.name
     shopList.shopDate = req.body.shopDate
     shopList.amount = 0
-    shopList.users = [id]
+    shopList.users = [idUser]
 
 
     shopList.save(function(error){
 		if (error) {
-			return res.status(500).send({message: 'Error al realizar la petición'})
+			return res.status(500).send({message: 'Request failed'})
 		}else{         
             return res.status(200).send({message: 'Successful save!!'})
 
@@ -35,8 +34,8 @@ function saveShopList(req, res){
 function getShopLists(req, res){
 
     ShopList.find({}, (err, shopLists) =>{
-        if(err) return res.status(500).send({message: 'Error al realizar la petición'})
-        if(!shopLists) return res.status(404).send({message:'No existen usuarios'})
+        if(err) return res.status(500).send({message: 'Request failed'})
+        if(!shopLists) return res.status(404).send({message:'Unregistered user'})
             
         res.send(200,{shopLists})
     })
@@ -47,10 +46,10 @@ function deleteShopList(req,res){
     let shopListId = req.params.idShopList
 
     ShopList.findById(shopListId, (err, shopList) => {
-        if(err) return res.status(500).send({message: 'Error al realizar la petición'})
+        if(err) return res.status(500).send({message: 'Request failed'})
         
         shopList.remove(err =>{
-            if(err) return res.status(500).send({message: 'Error al realizar la petición'})
+            if(err) return res.status(500).send({message: 'Request failed'})
             
             return res.status(200).send({message:'ShopList delete!!!'})
         })
@@ -64,7 +63,7 @@ function updateShopList(req,res){
     let updateShopList = req.body
 
     ShopList.findByIdAndUpdate(shopListId,updateShopList, (err, shopList) => {
-        if(err) return res.status(500).send({message: 'Error al realizar la petición'})
+        if(err) return res.status(500).send({message: 'Request failed'})
         
         res.status(200).send({shopList: shopList})
     })
@@ -74,11 +73,13 @@ function updateShopList(req,res){
 function getShopListUser(req, res) {
     
     let userId = req.params.idUser
-    ShopList.find({users: [userId]}, (err, shopList) =>{
-        if(err) return res.status(500).send({message:'Error al realizar la petición'})
-        res.send(200,{shopList})
-        //res.status(200).send({shopList})
-    })
+    ShopList.
+    find({ users: [userId] }).
+    populate('products'). // only works if we pushed refs to children
+    exec(function (err, shopLists) {
+        if (err) return handleError(err);
+        res.status(200).send({shopLists})
+    });
 } 
 
 //Actuliza el array de usuarios por parte de cada listas de compras

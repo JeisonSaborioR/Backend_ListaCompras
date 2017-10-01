@@ -2,14 +2,14 @@
 var mongoose = require('mongoose')
 var schema = mongoose.Schema
 var User = require('../models/User')
-
+var Product = require('../models/Product')
 
 var shopListModel = schema({
-    idUser : String,
+    idUser : {type: schema.ObjectId, ref: "User"},
     name: String,
     shopDate: String,   
     amount: Number,
-    products: Array,
+    products:[{type: schema.Types.ObjectId, ref:"Product"}],
     users: [{type: schema.ObjectId, ref: "User"}]
     
 })

@@ -34,8 +34,8 @@ function logUserGoogle(req, res){
             let email = req.body.email
             
             User.findOne({email: email}, (err, user) =>{
-                if(err) return res.status(500).send({message: 'Error al realizar la peteción'})
-                if(!user) return res.status(404).send({message:'No existen usuarios'})
+                if(err) return res.status(500).send({message: 'Request failed'})
+                if(!user) return res.status(404).send({message:'Unregistered user'})
                 return res.status(200).send({user})
             })
             //res.json({success:false,message:'Username or email already exists!'})
@@ -50,9 +50,9 @@ function logUserGoogle(req, res){
 function getUsers(req, res){
 
     User.find({}, (err, users) =>{
-        if(err) return res.status(500).send({message: 'Error al realizar la petición'})
-        if(!users) return res.status(404).send({message:'No existen usuarios'})
-            
+        if(err) return res.status(500).send({message: 'Request failed'})
+        if(!users) return res.status(404).send({message:'Unregistered user'})
+      
         return res.status(200).send({users})
     })
 }

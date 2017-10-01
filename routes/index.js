@@ -1,6 +1,5 @@
 var express = require('express')
 var api = express.Router()
-
 var productCtrl = require('../controllers/product')
 var userCtrl = require('../controllers/user')
 var shopListCtrl = require('../controllers/shopList')
