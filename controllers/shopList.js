@@ -100,31 +100,13 @@ function updateShopListArrayUsers(req,res){
     )
 }
 
-/*
-//Obtiene el usuario identificado por la idea solicitada
-function getShopListById(req, res){
 
-    let id = req.params.id
-
-    
-    User.findById(id, (err, user) =>{
-        if(err) return res.status(500).send({message: 'Error al realizar la peteción'})
-        if(!user) return res.status(404).send({message:'No existen usuarios'})
-        var nombre = user.nombre
-
-        console.log(user.shopList)
-        res.send(200,{user})
-    })
-}
-*/
 module.exports = {
     saveShopList,
     getShopLists,
     deleteShopList,
     updateShopList,
     getShopListUser,
-    updateShopListArrayUsers
-   
-    
+    updateShopListArrayUsers 
 }
 

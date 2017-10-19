@@ -21,7 +21,7 @@ function saveUser(req, res){
 }
 
 //Guarda los usuarios en la base de datos que realicen el login por medio de Google
-function logUserGoogle(req, res){
+function loginSocialNetwork(req, res){
 
     let user = new User()
 
@@ -82,7 +82,7 @@ function signIn(req, res){
 //Permite utilizar las funciones en otros scripts
 module.exports = {
     saveUser,
-    logUserGoogle,
+    loginSocialNetwork,
     getUsers,
     signIn
 }
