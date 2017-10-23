@@ -1,10 +1,8 @@
+'use strict'
 
 var mongoose = require('mongoose')
 var config = require('./config')
 var app = require('./app')
-
-
-
 
 //Conexión con la base de datos
 mongoose.connect(config.db, (err, res) => {

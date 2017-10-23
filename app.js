@@ -1,3 +1,5 @@
+'use strict'
+
 //Declaramos variable: express 'para hacer uso de los componentes de express, bodyParser 'lograr hacer uso de post y get en el entorno'
 var express = require('express')
 var bodyParser = require('body-parser')

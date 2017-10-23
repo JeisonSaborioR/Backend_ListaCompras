@@ -1,4 +1,6 @@
 
+'use strict'
+
 var Product = require('../models/Product')
 var ShopList = require('../models/ShopList')
 

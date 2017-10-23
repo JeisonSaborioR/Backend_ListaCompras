@@ -1,3 +1,5 @@
+'use strict'
+
 var mongoose = require('mongoose')
 var schema = mongoose.Schema
 var bcrypt = require('bcrypt-nodejs')
@@ -9,7 +11,6 @@ var userModel = schema({
     email:  {type: String, unique: true, lowercase: true},
     passWord: {type: String, select:false},
     userImage: String
-
 })
 
 //Encriptar password utilizando la libreria bcrypt

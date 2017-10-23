@@ -1,3 +1,5 @@
+'use strict'
+
 var express = require('express')
 var api = express.Router()
 var productCtrl = require('../controllers/product')

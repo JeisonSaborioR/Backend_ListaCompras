@@ -1,3 +1,4 @@
+'use strict'
 
 var User = require('../models/User')
 var bcrypt = require('bcrypt-nodejs')
@@ -12,7 +13,6 @@ function saveUser(req, res){
 
     user.save(function(error){
 		if (error) {
-           
 			res.json({success:false,message:'Username or email already exists!'})
 		}else{
 			res.json({success:true, message:'Successful save!!'})
@@ -63,7 +63,7 @@ function signIn(req, res){
     let email = req.body.email
     
     User.findOne({email: email}, (err, user) =>{
-        if(err) throw err
+        if(err) return res.status(503).send({message: 'Could not authenticate user!'})
         
         if(!user){
            return res.status(500).send({message: 'Could not authenticate user!'})
@@ -72,7 +72,6 @@ function signIn(req, res){
             if(validPassword){
                 return res.status(200).send({user})
 			}else{
-				
 				return res.status(500).send({message:'Could not authenticate user!'})
 			}
         }
