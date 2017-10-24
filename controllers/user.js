@@ -22,7 +22,7 @@ function saveUser(req, res){
 
 //Guarda los usuarios en la base de datos que realicen el login por medio de Google
 function loginSocialNetwork(req, res){
-
+    console.log("hola mundo")
     let user = new User()
 
     user.name = req.body.name

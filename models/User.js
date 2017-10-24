@@ -2,15 +2,15 @@
 
 var mongoose = require('mongoose')
 var schema = mongoose.Schema
-//var bcrypt = require('bcrypt-nodejs')
-var bcrypt = require('bcryptjs')
+var bcrypt = require('bcrypt-nodejs')
+//var bcrypt = require('bcryptjs')
 
 
 //Modelo para la creación del objeto usuario
 var userModel = schema({
 	name: String,
     email:  {type: String, unique: true, lowercase: true},
-    passWord: String,
+    passWord: {type: String},
     userImage: String
 })
 
