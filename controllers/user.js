@@ -61,13 +61,17 @@ function getUsers(req, res){
 //Permite la autentificación en un logueo normal por parte del usuario
 function signIn(req, res){
     let email = req.body.email
+    //console.log(email)
     
     User.findOne({email: email}, (err, user) =>{
+        
         if(err) return res.status(503).send({message: 'Could not authenticate user!'})
         
         if(!user){
            return res.status(500).send({message: 'Could not authenticate user!'})
         }else {
+            console.log("Sergio se la come")
+            //bcrypt.compareSync(password,this.password);
             var validPassword = user.comparePassword(req.body.password)
             if(validPassword){
                 return res.status(200).send({user})
