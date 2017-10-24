@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt-nodejs')
 
 //Guarda el usuario en la base de datos que realicen el registro
 function saveUser(req, res){
-
+    console.log(req.body)
     let user = new User()
     user.name = req.body.name
     user.email = req.body.email
@@ -64,20 +64,20 @@ function signIn(req, res){
     //console.log(email)
     
     User.findOne({email: email}, (err, user) =>{
-        
+        console.log(user)
+
         if(err) return res.status(503).send({message: 'Could not authenticate user!'})
         
         if(!user){
            return res.status(500).send({message: 'Could not authenticate user!'})
         }else {
-            console.log("Sergio se la come")
-            //bcrypt.compareSync(password,this.password);
             var validPassword = user.comparePassword(req.body.password)
+            console.log(validPassword)
             if(validPassword){
                 return res.status(200).send({user})
 			}else{
 				return res.status(500).send({message:'Could not authenticate user!'})
-			}
+            }
         }
     })
 }
