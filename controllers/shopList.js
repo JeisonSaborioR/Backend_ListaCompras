@@ -48,7 +48,7 @@ function deleteShopList(req,res){
     ShopList.findById(shopListId, (err, shopList) => {
         if(err) return res.status(500).send({message: 'Request failed'})
 
-        if(!shopLists) return res.status(404).send({message:'Unregistered shopList'})            
+        if(!shopList) return res.status(404).send({message:'Unregistered shopList'})            
 
         shopList.remove(err =>{
             if(err) return res.status(500).send({message: 'Request failed'})
