@@ -22,7 +22,7 @@ function saveShopList(req, res){
 		if (error) {
 			return res.status(500).send({message: 'Request failed'})
 		}else{         
-            return res.status(200).send({message: 'Successful save!!'})
+            return res.status(200).send({shopList})
 
 		} 
 	});
