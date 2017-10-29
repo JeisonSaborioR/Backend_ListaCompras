@@ -5,14 +5,18 @@ var bcrypt = require('bcrypt-nodejs')
 
 //Guarda el usuario en la base de datos que realicen el registro
 function saveUser(req, res){
-    console.log(req.body)
-    let user = new User()
-    user.name = req.body.name
-    user.email = req.body.email
-    user.password = req.body.password
+    
+    let user = new User({
+        email: req.body.email,
+        name: req.body.name,
+        passWord: req.body.password
+    })
+ 
+    
 
     user.save(function(error){
 		if (error) {
+            console.log(error)
 			res.json({success:false,message:'Username or email already exists!'})
 		}else{
 			res.json({success:true, message:'Successful save!!'})
@@ -22,7 +26,7 @@ function saveUser(req, res){
 
 //Guarda los usuarios en la base de datos que realicen el login por medio de Google
 function loginSocialNetwork(req, res){
-    console.log("hola mundo")
+    
     let user = new User()
 
     user.name = req.body.name
@@ -61,18 +65,16 @@ function getUsers(req, res){
 //Permite la autentificación en un logueo normal por parte del usuario
 function signIn(req, res){
     let email = req.body.email
-    //console.log(email)
-    
+   
     User.findOne({email: email}, (err, user) =>{
-        console.log(user)
-
+    
         if(err) return res.status(503).send({message: 'Could not authenticate user!'})
         
         if(!user){
            return res.status(500).send({message: 'Could not authenticate user!'})
         }else {
+           
             var validPassword = user.comparePassword(req.body.password)
-            console.log(validPassword)
             if(validPassword){
                 return res.status(200).send({user})
 			}else{
