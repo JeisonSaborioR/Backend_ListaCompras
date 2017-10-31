@@ -82,7 +82,7 @@ function getShopListUser(req, res) {
     exec(function (err, shopLists) {
         if (err) return err
         
-        return res.status(200).send({shopLists})
+        return res.status(200).send(shopLists)
     });
 } 
 
