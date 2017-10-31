@@ -17,10 +17,10 @@ function saveUser(req, res){
 
     user.save(function(error){
 		if (error) {
-            console.log(error)
+            
 			res.json({success:false,message:'Username or email already exists!'})
 		}else{
-			res.json({success:true, message:'Successful save!!'})
+			return res.status(200).send({user})
 		}
 	});
 }
