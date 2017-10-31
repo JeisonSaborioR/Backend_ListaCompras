@@ -9,7 +9,8 @@ function saveUser(req, res){
     let user = new User({
         email: req.body.email,
         name: req.body.name,
-        passWord: req.body.password
+        passWord: req.body.password,
+        userImage: req.body.userImage
     })
  
     
