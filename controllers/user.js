@@ -6,19 +6,16 @@ var bcrypt = require('bcrypt-nodejs')
 //Guarda el usuario en la base de datos que realicen el registro
 function saveUser(req, res){
     
-    let user = new User({
-        email: req.body.email,
-        name: req.body.name,
-        passWord: req.body.password,
-        userImage: req.body.userImage
-    })
- 
-    
+    let user = new User()
+
+    user.email = req.body.email,
+    user.name = req.body.name,
+    user.passWord = req.body.password,
+    user.userImage = req.body.userImage
 
     user.save(function(error){
 		if (error) {
-            
-			res.json({success:false,message:'Username or email already exists!'})
+            return res.status(500).send({message: 'Username or email already exists!'})
 		}else{
 			return res.status(200).send({user})
 		}
