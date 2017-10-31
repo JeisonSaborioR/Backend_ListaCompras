@@ -37,7 +37,8 @@ function getShopLists(req, res){
         if(err) return res.status(500).send({message: 'Request failed'})
         if(!shopLists) return res.status(404).send({message:'Unregistered user'})
             
-        res.send(200,{shopLists})
+
+        return res.status(200).send({shopLists})
     })
 }
 
@@ -80,7 +81,8 @@ function getShopListUser(req, res) {
     populate('products'). // only works if we pushed refs to children
     exec(function (err, shopLists) {
         if (err) return err
-        res.status(200).send({shopLists})
+        
+        return res.status(200).send({shopLists})
     });
 } 
 
