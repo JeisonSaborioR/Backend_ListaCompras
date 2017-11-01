@@ -39,8 +39,9 @@ function saveProduct(req, res){
 
 //Borra un producto de una lista de compras
 function deleteProduct(req,res){
+    let shopListId = req.params.idShopList
     let productId = req.params.idProduct
-
+    
     Product.findById(productId, (err, product) => {
         if(err) return res.status(500).send({message: 'Request failed'})
         
