@@ -10,6 +10,7 @@ var shopListModel = schema({
     name: String,
     shopDate: String,   
     amount: Number,
+    shopTime: String,
     products:[{type: schema.Types.ObjectId, ref:"Product"}],
     users: [{type: schema.ObjectId, ref: "User"}]
     

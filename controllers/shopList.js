@@ -14,6 +14,7 @@ function saveShopList(req, res){
     shopList.idUser = idUser
     shopList.name = req.body.name
     shopList.shopDate = req.body.shopDate
+    shopList.shopTime = req.body.shopTime
     shopList.amount = 0
     shopList.users = [idUser]
 
@@ -82,7 +83,7 @@ function getShopListUser(req, res) {
     exec(function (err, shopLists) {
         if (err) return err
         
-        return res.status(200).send({shopLists})
+        return res.status(200).send(shopLists)
     });
 } 
 

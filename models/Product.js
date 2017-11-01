@@ -10,7 +10,6 @@ var productModel = schema({
     price: Number,
     image: String,
     quantity: Number,
-    //idShopList: {type: schema.ObjectId, ref: "ShopList"},
     isInCart: Boolean 
 })
 
