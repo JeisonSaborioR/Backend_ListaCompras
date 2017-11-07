@@ -21,7 +21,7 @@ api.get('/getUsers',userCtrl.getUsers)
 api.post('/saveProduct',productCtrl.saveProduct)
 api.delete('/deleteProduct/:idProduct/:idShopList', productCtrl.deleteProduct)
 api.put('/updateProduct/:idProduct',productCtrl.updateProduct)
-api.put('/updateStateProduct',productCtrl.updateStateProduct)
+api.put('/updateStateProduct/:idProduct',productCtrl.updateStateProduct)
 
 
 
