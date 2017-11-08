@@ -55,12 +55,6 @@ function deleteProduct(req,res){
 }
 
 
-ShopList.findByIdAndUpdate(shopListId,updateShopList, (err, shopList) => {
-    if(err) return res.status(500).send({message: 'Request failed'})
-    
-    res.status(200).send({shopList: shopList})
-})
-
 //Actuliza un producto de la lista de compras
 function updateProduct(req,res){
     let productId = req.params.idProduct
