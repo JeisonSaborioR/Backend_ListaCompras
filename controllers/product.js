@@ -54,8 +54,6 @@ function deleteProduct(req,res){
 
 }
 
-let shopListId = req.params.idShopList
-let updateShopList = req.body
 
 ShopList.findByIdAndUpdate(shopListId,updateShopList, (err, shopList) => {
     if(err) return res.status(500).send({message: 'Request failed'})
@@ -78,7 +76,7 @@ function updateProduct(req,res){
 function updateStateProduct(req,res){
     
         let productId = req.params.idProduct
-        let shopListId  = req.body.idShopList
+        let shopListId  = req.params.idShopList
 
         ShopList.update(
             {_id: shopListId,"products._id":productId},

@@ -19,7 +19,7 @@ api.get('/getUsers',userCtrl.getUsers)
 //EndPoints para los productos
 
 api.post('/saveProduct',productCtrl.saveProduct)
-api.delete('/deleteProduct/:idProduct', productCtrl.deleteProduct)
+api.delete('/deleteProduct/:idProduct/:idShopList', productCtrl.deleteProduct)
 api.put('/updateProduct/:idProduct',productCtrl.updateProduct)
 api.put('/updateStateProduct/:idProduct',productCtrl.updateStateProduct)
 
