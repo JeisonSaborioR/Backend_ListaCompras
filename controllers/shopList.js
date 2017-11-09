@@ -37,7 +37,6 @@ function getShopLists(req, res){
     ShopList.find({}, (err, shopLists) =>{
         if(err) return res.status(500).send({message: 'Request failed'})
         if(!shopLists) return res.status(404).send({message:'Unregistered user'})
-            
 
         return res.status(200).send({shopLists})
     })
@@ -68,8 +67,12 @@ function updateShopList(req,res){
 
     ShopList.findByIdAndUpdate(shopListId,updateShopList, (err, shopList) => {
         if(err) return res.status(500).send({message: 'Request failed'})
-        
-        res.status(200).send({shopList: shopList})
+        console.log(shopList)
+        ShopList.findById(shopList._id, (err, shopListR) => {
+            if(err) return res.status(500).send({message: 'Request failed'})
+            res.status(200).send({shopList: shopListR})
+        })
+      
     })
 }
 

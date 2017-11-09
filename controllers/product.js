@@ -62,7 +62,14 @@ function updateProduct(req,res){
 
     Product.findByIdAndUpdate(productId,updateProduct, (err, product) => {
         if(err) return res.status(500).send({message: 'Request failed'})
-        res.status(200).send({product: product})
+        let idProduct = product._id
+        Product.findById(idProduct, (err, productR) => {
+            if(err) return res.status(500).send({message: 'Request failed'})
+            
+            res.status(200).send({product: productR})
+        
+        })
+       
     })
 }
 
@@ -70,17 +77,12 @@ function updateProduct(req,res){
 function updateStateProduct(req,res){
     
         let productId = req.params.idProduct
-        let shopListId  = req.params.idShopList
+        Product.findByIdAndUpdate(productId,updateProduct, (err, product) => {
+            if(err) return res.status(500).send({message: 'Request failed'})
+            res.status(200).send({product: product})
 
-        ShopList.update(
-            {_id: shopListId,"products._id":productId},
-            {$set: {"products.$": req.body}},
-            {multi: true},
-            function(err, model) {
-                console.log(err);
-            }
-            
-        )
+        })
+       
 }
 
 module.exports = {
