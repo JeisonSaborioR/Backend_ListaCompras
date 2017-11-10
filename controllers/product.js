@@ -41,13 +41,22 @@ function saveProduct(req, res){
 function deleteProduct(req,res){
     let shopListId = req.params.idShopList
     let productId = req.params.idProduct
-    
+   
     Product.findById(productId, (err, product) => {
         if(err) return res.status(500).send({message: 'Request failed'})
         
         product.remove(err =>{
             if(err) return res.status(500).send({message: 'Request failed'})
-            
+
+            ShopList.update(
+                {_id: shopListId},
+                {$pull: {products: product._id}},
+                {safe: true, upsert:true},
+                function(err, model) {
+                    console.log(err);
+                }
+                
+            )
             return res.status(200).send({message:'Product delete!!!'})
         })
     })
@@ -77,6 +86,7 @@ function updateProduct(req,res){
 function updateStateProduct(req,res){
     
         let productId = req.params.idProduct
+        let updateProduct = req.body
         Product.findByIdAndUpdate(productId,updateProduct, (err, product) => {
             if(err) return res.status(500).send({message: 'Request failed'})
             res.status(200).send({product: product})

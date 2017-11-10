@@ -67,12 +67,11 @@ function updateShopList(req,res){
 
     ShopList.findByIdAndUpdate(shopListId,updateShopList, (err, shopList) => {
         if(err) return res.status(500).send({message: 'Request failed'})
-        console.log(shopList)
         ShopList.findById(shopList._id, (err, shopListR) => {
             if(err) return res.status(500).send({message: 'Request failed'})
             res.status(200).send({shopList: shopListR})
         })
-      
+        
     })
 }
 
@@ -94,8 +93,7 @@ function getShopListUser(req, res) {
 function updateShopListArrayUsers(req,res){
     
     let shopListId = req.params.idShopList
-    let userId  = req.body.idUser
-
+    let userId  = req.body.idUser 
 
     ShopList.update(
         {_id: shopListId},
