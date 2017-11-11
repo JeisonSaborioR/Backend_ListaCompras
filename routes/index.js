@@ -32,9 +32,7 @@ api.get('/getShopLists',shopListCtrl.getShopLists)
 api.get('/getShopListsUser/:idUser', shopListCtrl.getShopListUser)
 api.delete('/deleteShopList/:idShopList', shopListCtrl.deleteShopList)
 api.put('/updateShopList/:idShopList',shopListCtrl.updateShopList)
-api.post('/shareShopList',shopListCtrl.updateShopListArrayUsers)
-
-
+api.put('/shareShopList/:idShopList',shopListCtrl.updateShopListArrayUsers)
 
 
 module.exports = api
