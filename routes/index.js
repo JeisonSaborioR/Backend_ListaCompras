@@ -12,6 +12,8 @@ api.post('/saveUser',userCtrl.saveUser)
 api.post('/loginSocialNetwork',userCtrl.loginSocialNetwork)
 api.post('/authenticate',userCtrl.signIn)
 api.get('/getUsers',userCtrl.getUsers)
+api.get('/getUser/:emailUser',userCtrl.getUser)
+
 
 
 
@@ -26,7 +28,6 @@ api.put('/updateStateProduct/:idProduct',productCtrl.updateStateProduct)
 
 
 //EndPoints para listas de compras
-
 api.post('/saveShopList',shopListCtrl.saveShopList)
 api.get('/getShopLists',shopListCtrl.getShopLists)
 api.get('/getShopListsUser/:idUser', shopListCtrl.getShopListUser)

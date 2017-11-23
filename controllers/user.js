@@ -60,6 +60,18 @@ function getUsers(req, res){
 }
 
 
+function getUser(req, res){
+    let emailUser = req.params.emailUser
+
+    User.findOne({email: emailUser}, (err, user) =>{
+        if(err) return res.status(500).send({message: 'Request failed'})
+        if(!user) return res.status(404).send({message:'Unregistered user'})
+        
+        return res.status(200).send({user})
+    })
+}
+    
+
 //Permite la autentificación en un logueo normal por parte del usuario
 function signIn(req, res){
     let email = req.body.email
@@ -82,11 +94,14 @@ function signIn(req, res){
     })
 }
 
+
+
 //Permite utilizar las funciones en otros scripts
 module.exports = {
     saveUser,
     loginSocialNetwork,
     getUsers,
+    getUser,
     signIn
 }
 

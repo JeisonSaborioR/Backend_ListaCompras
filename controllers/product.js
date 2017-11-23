@@ -47,8 +47,6 @@ function deleteProduct(req,res){
         
         product.remove(err =>{
             if(err) return res.status(500).send({message: 'Request failed'})
-
-            
             ShopList.update(
                 {_id: shopListId},
                 {$pull: {products: product._id}},
