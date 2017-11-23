@@ -35,5 +35,5 @@ api.delete('/deleteShopList/:idShopList', shopListCtrl.deleteShopList)
 api.put('/updateShopList/:idShopList',shopListCtrl.updateShopList)
 api.put('/shareShopList/:idShopList',shopListCtrl.updateShopListArrayUsers)
 
-
+ 
 module.exports = api

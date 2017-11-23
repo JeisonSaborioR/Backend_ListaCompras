@@ -77,14 +77,13 @@ function updateShopList(req,res){
 
 //Return todas las listas de compra para el usuario logueado
 function getShopListUser(req, res) {
-    
+    //console.log(req.params.idUser)
     let userId = req.params.idUser
     ShopList.
-    find({ users: [userId] }).
+    find({users: userId}).
     populate('products'). // only works if we pushed refs to children
     exec(function (err, shopLists) {
         if (err) return err
-        
         return res.status(200).send(shopLists)
     });
 } 
