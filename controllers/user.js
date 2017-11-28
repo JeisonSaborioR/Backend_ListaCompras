@@ -3,7 +3,7 @@
 var User = require('../models/User')
 var bcrypt = require('bcrypt-nodejs')
 
-//Guarda el usuario en la base de datos que realicen el registro
+//Saves the user in the database that performs the registration
 function saveUser(req, res){
     
     let user = new User()
@@ -22,7 +22,7 @@ function saveUser(req, res){
 	});
 }
 
-//Guarda los usuarios en la base de datos que realicen el login por medio de Google
+//Save the users in the database that perform the login through Google
 function loginSocialNetwork(req, res){
     
     let user = new User()
@@ -40,7 +40,7 @@ function loginSocialNetwork(req, res){
                 if(!user) return res.status(404).send({message:'Unregistered user'})
                 return res.status(200).send({user})
             })
-            //res.json({success:false,message:'Username or email already exists!'})
+           
 		}else{
 			return res.status(200).send({user})
 		}
@@ -48,7 +48,7 @@ function loginSocialNetwork(req, res){
 }
 
 
-//Obtiene todos los usuario registrados en la base de datos
+//Get all registered users in the database
 function getUsers(req, res){
 
     User.find({}, (err, users) =>{
@@ -59,7 +59,7 @@ function getUsers(req, res){
     })
 }
 
-
+//Get one user by email
 function getUser(req, res){
     let emailUser = req.params.emailUser
 
@@ -72,7 +72,7 @@ function getUser(req, res){
 }
     
 
-//Permite la autentificación en un logueo normal por parte del usuario
+//Allows authentication in a normal login by the user
 function signIn(req, res){
     let email = req.body.email
    
@@ -96,7 +96,8 @@ function signIn(req, res){
 
 
 
-//Permite utilizar las funciones en otros scripts
+
+// Allows you to use the functions in other scripts
 module.exports = {
     saveUser,
     loginSocialNetwork,

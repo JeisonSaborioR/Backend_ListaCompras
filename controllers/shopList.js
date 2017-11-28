@@ -2,10 +2,7 @@
 
 var ShopList = require('../models/ShopList')
 
-//var User = require('../models/User')
-
-
-//Guarda el usuario en la base de datos
+//Save the shopping list in the database
 function saveShopList(req, res){
 
     let idUser = req.body.idUser
@@ -31,7 +28,8 @@ function saveShopList(req, res){
 }
 
 
-//Obtiene todos los usuario registrados en la base de datos
+
+// Get all shopping list registered in the database
 function getShopLists(req, res){
 
     ShopList.find({}, (err, shopLists) =>{
@@ -42,7 +40,7 @@ function getShopLists(req, res){
     })
 }
 
-//Borra una lista de compras a partir del id de la lista de compras
+//Delete a shopping list with id
 function deleteShopList(req,res){
     let shopListId = req.params.idShopList
 
@@ -60,7 +58,7 @@ function deleteShopList(req,res){
 
 }
 
-//Actualiza un shop list a partir del id de la lista de compras
+//Update a shopping list with id
 function updateShopList(req,res){
     let shopListId = req.params.idShopList
     let updateShopList = req.body
@@ -75,20 +73,21 @@ function updateShopList(req,res){
     })
 }
 
-//Return todas las listas de compra para el usuario logueado
+// Return all shopping lists for the logged in user
 function getShopListUser(req, res) {
-    //console.log(req.params.idUser)
+   
     let userId = req.params.idUser
     ShopList.
     find({users: userId}).
-    populate('products'). // only works if we pushed refs to children
+    populate('products'). 
     exec(function (err, shopLists) {
         if (err) return err
         return res.status(200).send(shopLists)
     });
 } 
 
-//Actuliza el array de usuarios por parte de cada listas de compras
+
+// Update the user array by each shopping list
 function updateShopListArrayUsers(req,res){
     
     let shopListId = req.params.idShopList
@@ -105,7 +104,7 @@ function updateShopListArrayUsers(req,res){
     )
 }
 
-
+// Allows you to use the functions in other scripts
 module.exports = {
     saveShopList,
     getShopLists,

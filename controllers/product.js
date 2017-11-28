@@ -4,7 +4,8 @@
 var Product = require('../models/Product')
 var ShopList = require('../models/ShopList')
 
-//Guarda un producto en su respectiva lista de compras a partir del id
+
+// Save a product in your respective shopping list from id
 function saveProduct(req, res){
   
     let idShopList = req.body.idShopList
@@ -14,7 +15,7 @@ function saveProduct(req, res){
     product.price = req.body.price
     product.image = "#"
     product.quantity = req.body.quantity
-    //product.idShopList = idShopList
+
     product.isInCart = false 
     
     product.save(function(error){
@@ -37,7 +38,8 @@ function saveProduct(req, res){
 	});
 }
 
-//Borra un producto de una lista de compras
+
+// Delete a product from a shopping list
 function deleteProduct(req,res){
     let shopListId = req.params.idShopList
     let productId = req.params.idProduct
@@ -64,7 +66,8 @@ function deleteProduct(req,res){
 }
 
 
-//Actuliza un producto de la lista de compras
+
+// Update a product from the shopping list
 function updateProduct(req,res){
     let productId = req.params.idProduct
     let updateProduct = req.body
@@ -82,7 +85,7 @@ function updateProduct(req,res){
     })
 }
 
-//Actuliza el estado (isInCart true o false) de un producto
+// Update the status (isInCart true or false) of a product
 function updateStateProduct(req,res){
     
         let productId = req.params.idProduct
@@ -95,12 +98,11 @@ function updateStateProduct(req,res){
        
 }
 
+// Allows you to use the functions in other scripts
 module.exports = {
     saveProduct,
     deleteProduct,
     updateProduct,
     updateStateProduct
-
-    //getProduct
 }
 

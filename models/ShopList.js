@@ -5,6 +5,7 @@ var schema = mongoose.Schema
 var User = require('../models/User')
 var Product = require('../models/Product')
 
+//Model for the creation of shoppingList-type objects
 var shopListModel = schema({
     idUser : {type: schema.ObjectId, ref: "User"},
     name: String,
@@ -18,7 +19,7 @@ var shopListModel = schema({
 
 
 
-//Permite ser utilizada desde cualquier punto
+//It can be used from any point
 module.exports = mongoose.model('ShopList', shopListModel)
 
 
